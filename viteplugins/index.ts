@@ -5,8 +5,8 @@ import createCompression from './compression'
 import createSetupExtend from './setup-extend'
 import createStyleImport from './style-import'
 
-export default function createVitePlugins (viteEnv: any, isBuild = false) {
-  const vitePlugins = [vue()]
+export default function createVitePlugins(viteEnv: any, isBuild = false) {
+  const vitePlugins = [vue({})]
   vitePlugins.push(createSetupExtend())
   vitePlugins.push(createSvgIcon(isBuild))
   vitePlugins.push(createStyleImport())
