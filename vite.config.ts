@@ -1,12 +1,11 @@
-import { defineConfig,loadEnv } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import createVitePlugins from './viteplugins/index'
-import path from 'path'
-
+import { fileURLToPath } from 'url'
 // https://vitejs.dev/config/
-export default defineConfig(({ mode, command } ) => { 
+export default defineConfig(({ mode, command }) => {
   const env = loadEnv(mode, process.cwd())
   const {
     VITE_APP_ENV,
@@ -14,29 +13,32 @@ export default defineConfig(({ mode, command } ) => {
     VITE_APP_SERVER_PORT,
     VITE_APP_PROXY_TARGET
   } = env
-  const pluginList =createVitePlugins(env, command === 'build')
+  const pluginList = createVitePlugins(env, command === 'build')
 
   return {
-    base:VITE_APP_ENV === 'production' ? '/' : '/',
+    base: VITE_APP_ENV === 'production' ? '/' : '/',
     plugins: [
       ...pluginList,
       AutoImport({
         resolvers: [ElementPlusResolver()],
+        imports: ['vue', 'vue-router'],
+        dts: 'src/dts/auto-import.d.ts',
+        include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+        eslintrc: {
+          enabled: true
+        }
       }),
       Components({
         resolvers: [ElementPlusResolver()],
+        deep: true,
+        dirs: ['src/components'],
+        dts: 'src/dts/components.d.ts'
       })
     ],
     resolve: {
-      // https://cn.vitejs.dev/config/#resolve-alias
       alias: {
-        // 设置路径
-        '~': path.resolve(__dirname, './'),
-        // 设置别名
-        '@': path.resolve(__dirname, './src')
-      },
-      // https://cn.vitejs.dev/config/#resolve-extensions
-      extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue']
+        '@': fileURLToPath(new URL('./src', import.meta.url))
+      }
     },
     // vite 相关配置
     server: {
@@ -76,5 +78,5 @@ export default defineConfig(({ mode, command } ) => {
         ]
       }
     }
-}
+  }
 })
