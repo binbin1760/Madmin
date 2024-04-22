@@ -16,7 +16,7 @@ const constantRoute: Array<RouteRecordRaw> = [
     meta: {
       name: '登录'
     },
-    component: () => import('../views/login/index.vue')
+    component: () => import('@/views/login/index.vue')
   },
   {
     path: '/layout',
@@ -24,7 +24,7 @@ const constantRoute: Array<RouteRecordRaw> = [
     meta: {
       name: '配置layout'
     },
-    component: () => import('../layout/index.vue')
+    component: () => import('@/layout/index.vue')
   },
   {
     path: '/',
@@ -41,7 +41,7 @@ const routerHistory: RouterHistory = createWebHistory()
 const customRouterOptions: CustomRouterOptions = {
   history: routerHistory,
   routes: routes,
-  scrollBehavior(to, from, savePosition): any {
+  scrollBehavior(_to, _from, savePosition): any {
     if (savePosition) {
       return savePosition
     } else {

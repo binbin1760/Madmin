@@ -4,6 +4,7 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import createVitePlugins from './viteplugins/index'
 import { fileURLToPath } from 'url'
+
 // https://vitejs.dev/config/
 export default defineConfig(({ mode, command }) => {
   const env = loadEnv(mode, process.cwd())
@@ -14,14 +15,13 @@ export default defineConfig(({ mode, command }) => {
     VITE_APP_PROXY_TARGET
   } = env
   const pluginList = createVitePlugins(env, command === 'build')
-
   return {
     base: VITE_APP_ENV === 'production' ? '/' : '/',
     plugins: [
       ...pluginList,
       AutoImport({
         resolvers: [ElementPlusResolver()],
-        imports: ['vue', 'vue-router'],
+        imports: ['vue', 'vue-router', 'pinia'],
         dts: 'src/dts/auto-import.d.ts',
         include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
         eslintrc: {
@@ -47,7 +47,7 @@ export default defineConfig(({ mode, command }) => {
       open: false,
       proxy: {
         '/api': {
-          target: VITE_APP_PROXY_TARGET,
+          target: VITE_APP_BASE_API,
           changeOrigin: true,
           rewrite: (p) => p.replace(/^\/api/, '')
         }

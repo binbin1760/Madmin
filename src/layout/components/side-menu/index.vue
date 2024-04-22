@@ -1,19 +1,26 @@
 <template>
   <div class="menu">
-    <div @click="collapse = !collapse">开关</div>
+    <div
+      class="collspe-menu"
+      @click="collapse = !collapse"
+    >
+      开关
+    </div>
     <el-menu
       class="el-menu"
       mode="vertical"
       :collapse="collapse"
     >
-      <el-menu-item index="0">菜单1</el-menu-item>
+      <Menu :routes="sideMenu" />
     </el-menu>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { useMenuList } from '@/store/modules/menu'
+  import { Menu } from './components'
   const collapse = ref<boolean>(false)
+  const { sideMenu } = storeToRefs(useMenuList())
 </script>
 
 <style scoped lang="scss">
