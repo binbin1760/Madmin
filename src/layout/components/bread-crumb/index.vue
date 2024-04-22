@@ -4,4 +4,8 @@
 
 <script setup lang="ts"></script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+  .bread-crumb {
+    padding: 0 14px;
+  }
+</style>

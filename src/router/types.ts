@@ -2,7 +2,7 @@ import type { RouteRecordRaw, RouterOptions } from 'vue-router'
 
 export interface Meta {
   name: string
-  isRoot: boolean
+  isRoot: boolean //根节点
   hidden: boolean
   icon: string
   noCache: boolean

@@ -1,7 +1,7 @@
 <template>
   <div class="common-layout">
     <el-container>
-      <side-menu v-model:collapse="isCollapse" />
+      <side-menu />
       <el-container>
         <el-header>
           <div class="header">
@@ -11,7 +11,7 @@
           </div>
         </el-header>
         <el-main>
-          <div class="main">2313</div>
+          <div class="main"></div>
         </el-main>
       </el-container>
     </el-container>
@@ -19,43 +19,23 @@
 </template>
 
 <script setup lang="ts">
-  import { BreadCrumb, TagMenu, TopMenu, SideMenu } from './components'
-  import { ref } from 'vue'
-  import { ArrowLeftBold, ArrowRightBold } from '@element-plus/icons-vue'
-  const isCollapse = ref<boolean>(true)
-  const elSideWidth = ref<string>('180px')
-  function collapseMenu() {
-    isCollapse.value = !isCollapse.value
-  }
+  import { BreadCrumb, TopMenu, SideMenu } from './components'
+  import { useMenuList } from '@/store/modules/menu'
+  const { initMenuList } = useMenuList()
+  initMenuList()
 </script>
 
 <style scoped lang="scss">
   .common-layout {
     height: 100vh;
-    background: #eeeeee;
+    background: var(--main-bg);
     position: relative;
-    .el-aside {
-      height: 100vh;
-      background: aqua;
-      .collapse-icon {
-        position: absolute;
-        top: 45%;
-        left: v-bind(elSideWidth);
-        width: 30px;
-        height: 30px;
-        border-radius: 9999999px;
-        background: red;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-    }
+
     .el-header {
+      --el-header-padding: 0px;
       height: auto;
-      padding: 0 10px;
       .header {
         height: inherit;
-        background: white;
         display: flex;
         flex-direction: column;
         gap: 10px;
@@ -63,7 +43,7 @@
       }
     }
     .el-main {
-      padding: 10px;
+      padding: var(--main-p);
       .main {
         height: 100%;
         background: white;
