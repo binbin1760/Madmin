@@ -6,7 +6,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 **/*.log
-dts/
+dts
 tests/**/coverage/
 tests/e2e/reports
 selenium-debug.log

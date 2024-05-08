@@ -10,68 +10,27 @@ export interface RouterType {
 
 export const sideMenu: Array<RouterType> = [
   {
-    path: '/home',
-    name: 'home',
+    path: '/system',
+    name: 'system',
     componentSrc: 'layout/index',
     meta: {
-      name: '首页',
+      name: '系统设置',
       isRoot: true,
       hidden: false,
-      icon: 'icon1',
+      icon: ' ',
       noCache: false,
       outLink: false
     },
     children: [
       {
-        path: '/home/staff',
-        name: 'home-staff',
-        componentSrc: 'views/home/staff',
+        path: '/system/menu',
+        name: 'set-menu',
+        componentSrc: 'views/system/side-menu/index',
         meta: {
-          name: '员工',
+          name: '菜单管理',
           isRoot: false,
           hidden: false,
-          icon: 'icon1',
-          noCache: false,
-          outLink: false
-        }
-      },
-      {
-        path: '/home/group',
-        name: 'home-group',
-        componentSrc: 'views/home/group',
-        meta: {
-          name: '主管',
-          isRoot: false,
-          hidden: false,
-          icon: 'icon1',
-          noCache: false,
-          outLink: false
-        },
-        children: [
-          {
-            path: '/home/group/test',
-            name: 'home-group-test',
-            componentSrc: 'views/home/group',
-            meta: {
-              name: '主管-1',
-              isRoot: false,
-              hidden: false,
-              icon: 'icon1',
-              noCache: false,
-              outLink: false
-            }
-          }
-        ]
-      },
-      {
-        path: '/home/leader',
-        name: 'home-leader',
-        componentSrc: 'views/home/leader',
-        meta: {
-          name: '经理',
-          isRoot: false,
-          hidden: false,
-          icon: 'icon1',
+          icon: 'setMenu',
           noCache: false,
           outLink: false
         }
