@@ -4,11 +4,9 @@ import {
   RouteRecordRaw,
   RouterHistory
 } from 'vue-router'
-
 import { App } from 'vue'
-
 import type { CustomRouterOptions } from './types'
-
+import { createRouterGuards } from './guards'
 const constantRoute: Array<RouteRecordRaw> = [
   {
     path: '/login',
@@ -53,6 +51,7 @@ const router = createRouter(customRouterOptions)
 
 export function setupRouter(app: App) {
   app.use(router)
+  createRouterGuards(router)
 }
 
 export default router

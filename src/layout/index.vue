@@ -23,6 +23,8 @@
   import { useMenuList } from '@/store/modules/menu'
   const { initMenuList } = useMenuList()
   initMenuList()
+  const router = useRouter()
+  console.log(router)
 </script>
 
 <style scoped lang="scss">

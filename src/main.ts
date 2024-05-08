@@ -8,9 +8,9 @@ import '@/mock/index'
 
 async function initApp() {
   const app = createApp(App)
-  setupRouter(app)
   setupStore(app)
   setupDirectives(app)
+  setupRouter(app)
   app.mount('#app', true)
 }
 
